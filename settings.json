@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.claude/board/board.py:*)",
+      "Bash(python3 .claude/board/board.py:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/board/board.py brief"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/board_guard.py"
+          }
+        ]
+      }
+    ]
+  }
+}
